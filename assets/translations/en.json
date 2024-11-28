@@ -1,0 +1,20 @@
+{
+    "chooseLanguage": "Choose language",
+    "en": "English",
+    "ru": "Русский",
+    "skip": "Skip",
+    "next": "Next",
+    "start": "Start",
+    "writeHere": "Write here",
+    "userName": "Your username",
+    "priceOfPacker": "Price of packet",
+    "smokeADay": "How many do you smoke a day(approximately)",
+    "numberInPacker": "Number in a packet",
+    "timeFromLastSmoke": "How long has it been since you last smoked?",
+    "noData": "No data",
+    "addSmokeInfo": "Add your last smoke info",
+    "cancel": "Cancel",
+    "add": "Add",
+    "wantToAddSmokeInfo": "Do you really want to add new Smoke Info?",
+    "smokeInfo": "Smoke Info"
+}

@@ -1,4 +1,4 @@
-package com.example.fresh_start
+package com.freshstart.app
 
 import io.flutter.embedding.android.FlutterActivity
 
