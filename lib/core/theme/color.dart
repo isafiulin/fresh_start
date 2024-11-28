@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:flutter/material.dart';
 
 class ColorConstant {
@@ -155,7 +157,7 @@ class ColorConstant {
   static const Color selectedRowDarkThemeColor = Color(0xFF252525);
 
   static const Color unSelectedWidgetLightThemeColor = Color(0x8A000000);
-  static const Color unSelectedWidgetDarkThemeColor = Color(0x8AFFFFFF);
+  static const Color unSelectedWidgetDarkThemeColor = Color(0x8A000000);
 
   static const Color iconLightThemeColor = Color(0x8A000000);
   static const Color iconDarkThemeColor = Color(0x8AFFFFFF);
@@ -188,7 +190,7 @@ class ColorConstant {
   static const Color bodyText1LightThemeColor = Color(0xFF000000);
   static const Color bodyText2LightThemeColor = Color(0xFF000000);
 
-  static const Color bodyText1DarkThemeColor = Color(0xFFFFFFFF);
+  static const Color bodyText1DarkThemeColor = Color(0xFF000000);
   static const Color bodyText2DarkThemeColor = Color(0xFFFFFFFF);
 
   static const Color captionLightThemeColor = Color(0xFFA9A9A9);

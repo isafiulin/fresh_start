@@ -123,6 +123,7 @@ class _CustomButtonState extends State<CustomButton>
   }
 
   Future<void> _onTapCancel(_) {
+    // ignore: no_wildcard_variable_uses
     return _onTapUp(_);
   }
 

@@ -63,6 +63,13 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.symmetric(horizontal: 24.w),
               child: Column(
                 children: [
+                  Text(
+                      "тут будет рандомно меняться текст мотивации, чтобы бросить курить",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 11.sp)),
+                  SizedBox(
+                    height: 8.h,
+                  ),
                   Text(LocaleKeys.timeFromLastSmoke,
                           textAlign: TextAlign.center,
                           style: TextStyle(fontSize: 13.sp))
@@ -144,7 +151,15 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                  )
+                  ),
+                  SizedBox(
+                    height: 16.h,
+                  ),
+                  Text(
+                    'добавить геймификацию, если пользователь продолжает курить, то маскот визуально стареет и ему станвоится хуже',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 11.sp),
+                  ),
                 ],
               ),
             ),

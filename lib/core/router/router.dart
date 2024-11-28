@@ -166,12 +166,6 @@ final goRouter = GoRouter(
             )
           ],
         ),
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-                path: '/empty', builder: (context, state) => const SizedBox())
-          ],
-        ),
         StatefulShellBranch(routes: [
           GoRoute(
             path: RouterPath.info,

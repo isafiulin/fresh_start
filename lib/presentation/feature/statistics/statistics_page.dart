@@ -90,7 +90,6 @@ class StatisticsPage extends StatelessWidget {
 }
 
 String formatDateTime(DateTime dateTime, String locale) {
-  print(locale);
   bool is24HourFormat = !locale.startsWith('en') || !locale.endsWith('_US');
 
   String timePattern = is24HourFormat ? 'HH:mm' : 'hh:mm a'; // 24 ч или 12ч

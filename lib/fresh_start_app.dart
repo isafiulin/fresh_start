@@ -34,7 +34,6 @@ class _FreshStartAppState extends State<FreshStartApp> {
   Widget build(BuildContext context) {
     return BlocBuilder<AppThemeCubit, ThemeMode>(
       builder: (context, ThemeMode mode) {
-        print(mode);
         return MaterialApp.router(
           builder: FlutterSmartDialog.init(
             builder: (context, child) {
