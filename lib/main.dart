@@ -14,9 +14,12 @@ import 'package:fresh_start/data/models/profile.dart';
 import 'package:fresh_start/data/models/smoke_info.dart';
 import 'package:fresh_start/fresh_start_app.dart';
 import 'package:fresh_start/injectable.dart';
+import 'package:fresh_start/presentation/widgets/dash_with_sign.dart';
 import 'package:fresh_start/service/app_theme/cubit/app_theme_cubit.dart';
 import 'package:fresh_start/service/authentication/bloc/authentication_bloc.dart';
+import 'package:fresh_start/service/smoker_service.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:home_widget/home_widget.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
@@ -29,7 +32,8 @@ Future<void> main() async {
 
   await configure();
   await EndPointConstant().init();
-  await Hive.initFlutter();
+  final appDir = await getApplicationDocumentsDirectory();
+  Hive.init(appDir.path);
 
   Bloc.observer = AppBlocObserver();
 
@@ -71,6 +75,11 @@ Future<void> main() async {
 
   await Hive.openBox<Profile>('Profile');
 
+  // Set AppGroup Id. This is needed for iOS Apps to talk to their WidgetExtensions
+  await HomeWidget.setAppGroupId('group.fresh.start.home.screen');
+  // Register an Interactivity Callback. It is necessary that this method is static and public
+  await HomeWidget.registerInteractivityCallback(interactiveCallback);
+
   await SentryFlutter.init(
     (options) {
       options.dsn =
@@ -107,4 +116,50 @@ Future<void> main() async {
       ),
     ),
   );
+}
+
+/// Callback invoked by HomeWidget Plugin when performing interactive actions
+/// The @pragma('vm:entry-point') Notification is required so that the Plugin can find it
+@pragma('vm:entry-point')
+Future<void> interactiveCallback(Uri? uri) async {
+  // Set AppGroup Id. This is needed for iOS Apps to talk to their WidgetExtensions
+  await HomeWidget.setAppGroupId('group.fresh.start.home.screen');
+
+  // We check the host of the uri to determine which action should be triggered.
+  if (uri?.host == 'increment') {
+    try {
+      print("4333");
+      WidgetsFlutterBinding.ensureInitialized();
+
+      await Hive.initFlutter();
+
+      // final int val = await SmokerService.addNewSmokerInfo();
+      // print(val);
+      // _sendAndUpdate(val);
+    } catch (e) {
+      print(e);
+    }
+  } else if (uri?.host == 'clear') {
+    // await _clear();
+  }
+}
+
+const _countKey = 'counter';
+
+Future<void> _sendAndUpdate([int? value]) async {
+  await HomeWidget.saveWidgetData(_countKey, value);
+  await HomeWidget.renderFlutterWidget(
+    DashWithSign(count: value ?? 0),
+    key: 'dash_counter',
+    logicalSize: const Size(100, 100),
+  );
+  await HomeWidget.updateWidget(
+    iOSName: 'CounterWidget',
+    androidName: 'CounterWidgetProvider',
+  );
+
+  if (Platform.isAndroid) {
+    // Update Glance Provider
+    await HomeWidget.updateWidget(androidName: 'CounterGlanceWidgetReceiver');
+  }
 }
